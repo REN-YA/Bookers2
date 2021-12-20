@@ -5,5 +5,5 @@ Rails.application.routes.draw do
   root to: 'homes#top'
   resource :users
   resource :books
-  
+
 end
