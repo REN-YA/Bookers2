@@ -6,10 +6,11 @@ class BooksController < ApplicationController
   def create
     book = Book.new(book_params)
     book.save
-    redirect_to book_show
+    redirect_to book_path
   end
 
   def index
+    @books = Book.all
   end
 
   def show
