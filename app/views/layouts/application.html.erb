@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html>
   <head>
+  <script src="https://kit.fontawesome.com/7e2f29440c.js" crossorigin="anonymous"></script>
     <title>Bookers2</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    
+
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    
+
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
@@ -14,29 +15,36 @@
   <body>
   <body class="d-flex flex-column vh-100">
     <header class="shadow-sm">
-      <nav class="navbar navbar-expand-lg navbar-light">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
- 
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span>Bookers</span>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="true" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav ml-auto">
+              <li>
+                <i class="fas fa-book"></i>
+              </li>
+              <li>
+                <%= link_to "Home", root_path, class: 'nav-link text-ligth' %>
+              </li>
             <% if user_signed_in? %>
             <li class="nav-item">
-              <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: 'nav-link text-dark' %>
+              <%= link_to 'Books', books_path, class: 'nav-link text-ligth' %>
             </li>
-          
-            
             <li class="nav-item">
-              <%= link_to 'マイページ', user_path(current_user.id), class: 'nav-link text-dark' %>
+              <%= link_to 'Users', users_path, class: 'nav-link text-ligth' %>
+            </li>
+            <li>
+              <%= link_to "Log out", destroy_user_session_path, method: :delete, class: 'nav-link text-ligth' %>
             </li>
             <% else %>
             <li class="nav-item">
-              <%= link_to "新規登録", new_user_registration_path, class: 'nav-link text-dark' %>
+              <%= link_to "Sign up", new_user_registration_path, class: 'nav-link text-ligth' %>
             </li>
             <li class="nav-item">
-              <%= link_to "ログイン", new_user_session_path, class: 'nav-link text-dark' %>
+              <%= link_to "Log in", new_user_session_path, class: 'nav-link text-ligth' %>
             </li>
             <% end %>
             </ul>
@@ -47,10 +55,10 @@
     <main class="mb-auto">
     <%= yield %>
     </main>
-    <footer class="bg-dark text-white pt-5 pb-4">
-      <div class="container">
+    <footer>
+      <div class="container mt-5">
         <div class="row no-gutters">
-          <div class="col-md-4">
+          <div class="mx-auto">
             <p>Copy Rigth Infratop.inc</p>
           </div>
         </div>
