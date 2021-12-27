@@ -1,5 +1,6 @@
 class BooksController < ApplicationController
 before_action :authenticate_user!
+ before_action :cheack,only: [:edit, :update]
 
   def new
     @book = Book.new
@@ -7,6 +8,7 @@ before_action :authenticate_user!
   end
 
   def create
+    @user = current_user
     @book = Book.new(book_params)
     @book.user_id = current_user.id
     if @book.save
@@ -33,17 +35,8 @@ before_action :authenticate_user!
 
   def edit
      @book = Book.find(params[:id])
-    if@book.save
-    redirect_to book_path(@book.id)
-    else
-     @books = Book.all
-     render :edit
-    end
-    if @book.user == current_user
-       render "edit"
-    else
-            redirect_to books_path
-    end
+
+
   end
 
   def update
@@ -68,6 +61,13 @@ before_action :authenticate_user!
 
   def book_params
     params.require(:book).permit(:title, :body)
+  end
+
+  def cheack
+        @book = Book.find(params[:id])
+    if @book.user.id != current_user.id
+      redirect_to books_path
+    end
   end
 
 end

@@ -1,17 +1,22 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
+  before_action :cheack,only: [:edit,:update]
+
+
   def new
     @user = User.new
   end
 
   def create
+
     user = User.new(user_params)
     user.save
     redirect_to book_params_path
   end
 
   def index
-    @book = Book.all
+    @book = Book.new
+    @books = Book.all
     @users = User.all
     @user = current_user
   end
@@ -36,7 +41,7 @@ class UsersController < ApplicationController
     @user =User.find(params[:id])
     if @user.update(user_params)
       flash[:notice] = "You have updated user successfully"
-      redirect_to user_path
+      redirect_to user_path(@user.id)
     else
       render :edit
     end
@@ -50,4 +55,10 @@ class UsersController < ApplicationController
     params.require(:user).permit(:name, :introduction, :profile_image)
   end
 
+  def cheack
+        @user = User.find(params[:id])
+    if @user.id != current_user.id
+      redirect_to user_path(current_user)
+    end
+  end
 end

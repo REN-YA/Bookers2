@@ -1,18 +1,18 @@
  <div class="col-md-3">
             <h2>User info</h2>
-            <table class="table">
-            <tr>
-               <td><%= attachment_image_tag user, :profile_image, fallback: "no_image.jpg", size: "50x50"%></td>
-            </tr>
-            <tr>
-               <th>name</th>
-               <td><%= user.name %></td>
-            </tr>
-            <tr>
-               <th>Introduction</th>
-               <td><%= user.introduction %></td>
-            </tr>
-            </table>
+
+               <%= attachment_image_tag user, :profile_image, fallback: "no_image.jpg", size: "50x50"%>
+               <table class="table">
+               <tr>
+
+                  <th>name</th>
+                  <td><%= user.name %></td>
+               </tr>
+               <tr>
+                  <th>Introduction</th>
+                  <td><%= user.introduction %></td>
+               </tr>
+               </table>
             <div class="row">
             <%= link_to edit_user_path(user),class: "btn btn-outline-secondary btn-block" do %>
             <i class="fas fa-user-cog"></i>
